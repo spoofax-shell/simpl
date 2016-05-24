@@ -1,0 +1,22 @@
+module Shell
+
+shell
+
+    evaluation method   : "dynsem"
+    interpreter path    : "/home/skip/Programming/Spoofax/simpl/simpl.interpreter/simpl.interpreter-0.0.1-SNAPSHOT-jar-with-dependencies.jar"
+
+    shell start symbols : Program Expr Class
+
+    command prefix      : ":"
+
+    command: "foo"
+      strategy = something
+      description = "Does something"
+
+    command: "bar"
+      strategy = bar
+      description = "Does bar"
+
+    command: "missing"
+      description = "Misses a strategy name"
+      description = "Has a duplicate description"

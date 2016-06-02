@@ -4,7 +4,7 @@ imports
   Common
 
 context-free start-symbols
-  Prog
+  Prog Shell
 
 context-free syntax
   Prog.Program = Exp
@@ -37,6 +37,11 @@ context-free syntax
 
 context-free syntax
   Exp.Ifz = <ifz <Exp> then <Exp> else <Exp>>
+
+context-free syntax
+  // Syntax for the Shell.
+
+  Shell.Let = <let <ID> = <Exp>> {non-assoc}
 
 context-free priorities
 

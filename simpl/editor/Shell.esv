@@ -3,9 +3,8 @@ module Shell
 shell
 
     evaluation method   : "dynsem"
-    interpreter path    : "/home/skip/Programming/Spoofax/simpl/simpl.interpreter/target/simpl.interpreter-0.0.1-SNAPSHOT-jar-with-dependencies.jar"
 
-    shell start symbols : Program Expr Class
+    shell start symbol  : Shell
 
     command prefix      : ":"
 

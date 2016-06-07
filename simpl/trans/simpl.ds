@@ -24,7 +24,7 @@ signature
 signature
   arrows 
     Prog -init-> V
-    ShellInit -init-> Env
+    ShellInit -init-> ShellInit
     Prog -shell-> V
     Shell -shell-> V
 
@@ -35,12 +35,13 @@ rules
     Env {} |- e :: Heap {} --> v :: Heap _.
 
   // Initialization of shell state: an empty environment and an empty heap.
-  ShellInit() -init-> {} :: Heap {}.
+  ShellInit() -init-> ShellInit() :: Env { "x" |--> NumV(4) }, Heap {}.
 
   Program(e) :: E -shell-> v
     where
       E |- e :: Heap {} --> v :: Heap _.
 
+  // let x = 2
   Let(x, e) :: E -shell-> v :: E'
   where
     E |- e :: Heap {} --> v :: Heap _;

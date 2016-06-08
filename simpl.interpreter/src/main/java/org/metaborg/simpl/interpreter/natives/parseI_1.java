@@ -1,10 +1,12 @@
-package simpl.interpreter.natives;
+package org.metaborg.simpl.interpreter.natives;
 
 import org.metaborg.meta.lang.dynsem.interpreter.nodes.building.TermBuild;
 
 import com.oracle.truffle.api.dsl.NodeChild;
 import com.oracle.truffle.api.dsl.Specialization;
 import com.oracle.truffle.api.source.SourceSection;
+
+import org.metaborg.simpl.interpreter.natives.parseI_1NodeGen;
 
 @NodeChild(value = "stringbuild", type = TermBuild.class)
 public abstract class parseI_1 extends TermBuild {

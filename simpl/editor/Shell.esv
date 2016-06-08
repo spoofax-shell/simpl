@@ -7,15 +7,3 @@ shell
     shell start symbol  : Shell
 
     command prefix      : ":"
-
-    command: "foo"
-      strategy = something
-      description = "Does something"
-
-    command: "bar"
-      strategy = bar
-      description = "Does bar"
-
-    command: "missing"
-      description = "Misses a strategy name"
-      description = "Has a duplicate description"

@@ -37,14 +37,14 @@ rules
   // Initialization of shell state: an empty environment and an empty heap.
   ShellInit() -init-> ShellInit() :: Env { "x" |--> NumV(4) }, Heap {}.
 
-  Program(e) :: E -shell-> v
+  Program(e) :: E, H -shell-> v :: E, H'
     where
-      E |- e :: Heap {} --> v :: Heap _.
+      E |- e :: H --> v :: H'.
 
   // let x = 2
-  Let(x, e) :: E -shell-> v :: E'
+  Let(x, e) :: E, H -shell-> v :: E', H'
   where
-    E |- e :: Heap {} --> v :: Heap _;
+    E |- e :: H --> v :: H';
     E |- bindVar(x, v) --> E'.
 
 rules

@@ -20,15 +20,19 @@ context-free syntax
   
 context-free syntax
 
+  ID = <box> {reject}
+  ID = <unbox> {reject}
+  ID = <setbox> {reject}
+
   Exp.Let = <let <ID> = <Exp> in <Exp>> {non-assoc}
     
   Exp.Var = <<ID>> 
 
 context-free syntax
 
-  Exp.Box = <box(<Exp>)>
-  Exp.Unbox = <unbox(<Exp>)>
-  Exp.Setbox = <setbox(<Exp>, <Exp>)>
+  Exp.Box = <box(<Exp>)> {prefer}
+  Exp.Unbox = <unbox(<Exp>)> {prefer}
+  Exp.Setbox = <setbox(<Exp>, <Exp>)> {prefer}
 
 context-free syntax
 
@@ -55,8 +59,11 @@ context-free priorities
     Exp.Plus
     Exp.Minus
   } >
+  { Exp.Box
+    Exp.Unbox
+    Exp.Setbox
     Exp.Fun
-  >
+  } >
   {non-assoc:
     Exp.Let
   }

@@ -5,8 +5,12 @@ imports
   trans/runtime/runtime
   
 signature
+  sorts
+    ShellInit
+
   constructors
     NumV: Int -> V
+    ShellInit : ShellInit
 
   arrows
     Exp --> V
@@ -20,13 +24,29 @@ signature
 signature
   arrows 
     Prog -init-> V
+    ShellInit -init-> ShellInit
+    Prog -shell-> V
+    Shell -shell-> V
 
 rules
   
   Program(e) -init-> v
   where
     Env {} |- e :: Heap {} --> v :: Heap _.
-    
+
+  // Initialization of shell state: an empty environment and an empty heap.
+  ShellInit() -init-> ShellInit() :: Env { "x" |--> NumV(4) }, Heap {}.
+
+  Program(e) :: E, H -shell-> v :: E, H'
+    where
+      E |- e :: H --> v :: H'.
+
+  // let x = 2
+  Let(x, e) :: E, H -shell-> v :: E', H'
+  where
+    E |- e :: H --> v :: H';
+    E |- bindVar(x, v) --> E'.
+
 rules
   
   Lit(s) --> NumV(parseI(s)).

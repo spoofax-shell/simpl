@@ -4,7 +4,7 @@ imports
   Common
 
 context-free start-symbols
-  Prog
+  Prog Shell
 
 context-free syntax
   Prog.Program = Exp
@@ -20,15 +20,19 @@ context-free syntax
   
 context-free syntax
 
+  ID = <box> {reject}
+  ID = <unbox> {reject}
+  ID = <setbox> {reject}
+
   Exp.Let = <let <ID> = <Exp> in <Exp>> {non-assoc}
     
   Exp.Var = <<ID>> 
 
 context-free syntax
 
-  Exp.Box = <box(<Exp>)>
-  Exp.Unbox = <unbox(<Exp>)>
-  Exp.Setbox = <setbox(<Exp>, <Exp>)>
+  Exp.Box = <box(<Exp>)> {prefer}
+  Exp.Unbox = <unbox(<Exp>)> {prefer}
+  Exp.Setbox = <setbox(<Exp>, <Exp>)> {prefer}
 
 context-free syntax
 
@@ -37,6 +41,11 @@ context-free syntax
 
 context-free syntax
   Exp.Ifz = <ifz <Exp> then <Exp> else <Exp>>
+
+context-free syntax
+  // Syntax for the Shell.
+
+  Shell.Let = <let <ID> = <Exp>> {non-assoc}
 
 context-free priorities
 
@@ -50,8 +59,11 @@ context-free priorities
     Exp.Plus
     Exp.Minus
   } >
+  { Exp.Box
+    Exp.Unbox
+    Exp.Setbox
     Exp.Fun
-  >
+  } >
   {non-assoc:
     Exp.Let
   }
